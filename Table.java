@@ -11,6 +11,7 @@ public class Table {
 	public void setStudsAtTable(ArrayList<Student> studsAtTable) {
 		this.studsAtTable = studsAtTable;
 	}
+	
 
 	public String getTeacher() {
 		return Teacher;
@@ -19,16 +20,14 @@ public class Table {
 	public void setTeacher(String teacher) {
 		Teacher = teacher;
 	}
-
-	public int getTeachExtras() {
-		return teachExtras;
+	public int getNumStudsAtTable() {
+		return numStudsAtTable;
 	}
 
-	public void setTeachExtras(int teachExtras) {
-		this.teachExtras = teachExtras;
+	public void setNumStudsAtTable(int numStudsAtTable) {
+		this.numStudsAtTable = numStudsAtTable;
 	}
-
 	String Teacher;
 	
-	int teachExtras;
+	int numStudsAtTable;
 }

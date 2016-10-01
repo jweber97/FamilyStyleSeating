@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
@@ -25,7 +26,7 @@ public class Main {
 
 
 		//import students from csv with name, grade and gender
-		String csvFile = "/Users/Jack/Desktop/StudentListForJackWeber.csv";
+		String csvFile = "D:/MyProfile/Downloads/StudentListForJackWeber.csv";
 		String line = "";
 		String cvsSplitBy = ",";
 
@@ -85,139 +86,72 @@ public class Main {
 				}
 			}
 		}
+		
+		ArrayList <Student> sortedStuds = new ArrayList();
+		
+		sortedStuds.addAll(f9Studs);
+		sortedStuds.addAll(f10Studs);
+		sortedStuds.addAll(f11Studs);
+		sortedStuds.addAll(f12Studs);
 
-		//create tables
-
+		sortedStuds.addAll(m9Studs);
+		sortedStuds.addAll(m10Studs);
+		sortedStuds.addAll(m11Studs);
+		sortedStuds.addAll(m12Studs);
+		
 		ArrayList<Table> tables = new ArrayList();
 
 		int numTables = Math.round(allStuds.size()/8);
-		int m9PosKeeper =0;
-		int m10PosKeeper=0;
-		int m11PosKeeper =0;
-		int m12PosKeeper=0;
-
-		ArrayList<Student> studsAtATable = new ArrayList();
-
+		
+		//create tables
 		for (int i=0; i<numTables; i++){
-			Table newTable = new Table();
-
-			if (m9Studs.size()>m9PosKeeper){
-				newTable.studsAtTable.add(m9Studs.get(m9PosKeeper++));
-				studsAtATable.add(m9Studs.get(m9PosKeeper-1));
-			}
-			else if (m9Studs.size()<=m9PosKeeper){
-				if (m10Studs.size()>m10PosKeeper){
-					newTable.studsAtTable.add(m10Studs.get(m10PosKeeper++));
-					studsAtATable.add(m10Studs.get(m10PosKeeper-1));
-
-				}
-				else if (m10Studs.size()<=m10PosKeeper){
-					if (m11Studs.size()>m11PosKeeper){
-						newTable.studsAtTable.add(m11Studs.get(m11PosKeeper++));
-						studsAtATable.add(m11Studs.get(m11PosKeeper-1));
-
-					}
-					else if (m11Studs.size()<=m11PosKeeper){
-						if (m12Studs.size()>m12PosKeeper){
-							newTable.studsAtTable.add(m12Studs.get(m12PosKeeper++));
-							studsAtATable.add(m12Studs.get(m12PosKeeper-1));
-						}
-
-					}
-				}
-			}
-			if (m10Studs.size()>m10PosKeeper){
-				newTable.studsAtTable.add(m10Studs.get(m10PosKeeper++));
-				studsAtATable.add(m10Studs.get(m10PosKeeper-1));
-			}
-			else if (m10Studs.size()<=m10PosKeeper){
-				if (m11Studs.size()>m11PosKeeper){
-					newTable.studsAtTable.add(m11Studs.get(m11PosKeeper++));
-					studsAtATable.add(m11Studs.get(m11PosKeeper-1));
-
-				}
-				else if (m11Studs.size()<=m11PosKeeper){
-					if (m12Studs.size()>m12PosKeeper){
-						newTable.studsAtTable.add(m12Studs.get(m12PosKeeper++));
-						studsAtATable.add(m12Studs.get(m12PosKeeper-1));
-
-					}
-				}
-			}
-			if (m11Studs.size()>m11PosKeeper){
-				newTable.studsAtTable.add(m11Studs.get(m11PosKeeper++));
-				studsAtATable.add(m11Studs.get(m11PosKeeper-1));
-			}
-			else if (m11Studs.size()<=m11PosKeeper){
-				if (m12Studs.size()>m12PosKeeper){
-					newTable.studsAtTable.add(m12Studs.get(m12PosKeeper++));
-					studsAtATable.add(m12Studs.get(m12PosKeeper-1));
-
-				}
-			}
-			if (m12Studs.size()>m12PosKeeper){
-				newTable.studsAtTable.add(m12Studs.get(m12PosKeeper++));
-				studsAtATable.add(m12Studs.get(m12PosKeeper-1));
-
-			}
-
-			///////girls////////
-			if (f9Studs.size()>i){
-				newTable.studsAtTable.add(f9Studs.get(i));
-				studsAtATable.add(f9Studs.get(i));
-			}
-
-			if (f10Studs.size()>i){
-				newTable.studsAtTable.add(f10Studs.get(i));
-				studsAtATable.add(f10Studs.get(i));
-			}
-
-			if (f11Studs.size()>i){
-				newTable.studsAtTable.add(f11Studs.get(i));
-				studsAtATable.add(f11Studs.get(i));
-			}
-
-			if (f12Studs.size()>i){
-				newTable.studsAtTable.add(f12Studs.get(i));
-				studsAtATable.add(f12Studs.get(i));
-			}
-			
-			tables.add(newTable);
+			Table t= new Table();
+			t.setNumStudsAtTable(9);
+			tables.add(t);
 		}
-
-		ArrayList<Student> remainingGirls = new ArrayList();
 		
-		remainingGirls.addAll(f9Studs);
-		remainingGirls.addAll(f10Studs);
-		remainingGirls.addAll(f11Studs);
-		remainingGirls.addAll(f12Studs);
+		Scanner scan = new Scanner(System.in);
 		
-		remainingGirls.removeAll(studsAtATable);
+		int tExtrasCount=0;
 		
-ArrayList<Student> remainingBoys = new ArrayList();
+		System.out.println("How many teachers are bringing one extra?");
 		
-		remainingBoys.addAll(m9Studs);
-		remainingBoys.addAll(m10Studs);
-		remainingBoys.addAll(m11Studs);
-		remainingBoys.addAll(m12Studs);
+		int eightTables = scan.nextInt();
 		
-		remainingBoys.removeAll(studsAtATable);
+		tExtrasCount =tExtrasCount+ eightTables;
 		
-		
-		for (int i=0; i<numTables; i++){
-			while (tables.get(i).studsAtTable.size()<8){
-				if (remainingGirls.size()>0){
-				tables.get(i).studsAtTable.add(remainingGirls.get(0));
-				remainingGirls.remove(0);
-				}
-				else if (remainingBoys.size()>0){
-					tables.get(i).studsAtTable.add(remainingBoys.get(0));
-					remainingBoys.remove(0);
-					}
-			}
-		
+		for (int i=0; i<eightTables; i++){
+			tables.get(i).setNumStudsAtTable(8);
 		}
+		
+System.out.println("How many teachers are bringing 2 extras?");
+		
+		int sevenTables = scan.nextInt();
+		
+		tExtrasCount =tExtrasCount+ sevenTables;
 
+		
+		for (int i=0; i<sevenTables; i++){
+			tables.get(i).setNumStudsAtTable(7);
+		}
+		
+		//put students at tables removing them from studsAtTable after
+		for (int i=0; i<9; i++){
+			for (int j=0; j<tables.size();j++){
+				if (sortedStuds.isEmpty()) break;
+				if (tables.get(i).numStudsAtTable==tables.get(i).studsAtTable.size()){
+					continue;
+				}
+				else {
+				tables.get(j).studsAtTable.add(sortedStuds.get(0));
+				sortedStuds.remove(0);
+				}
+			}
+		}
+		
+		
+		
+		
 
 
 		for (int j=0; j<numTables; j++){
@@ -225,14 +159,14 @@ ArrayList<Student> remainingBoys = new ArrayList();
 			System.out.println("Table: " + tableNum);
 			for (int k=0; k<8; k++){
 				System.out.println(tables.get(j).getStudsAtTable().get(k).Name);
-
 			}
 		}
-		System.out.println("");
-		System.out.println("Students Remaining: ");
-		for (int i1=0; i1<remainingBoys.size(); i1++){
-			System.out.println(remainingBoys.get(i1).getName());
-		}
+		
+//		System.out.println("");
+//		System.out.println("Remaining:");
+//		for(int i=0; i<sortedStuds.size();i++){
+//			System.out.println(sortedStuds.get(i).getName());
+//		}
 	}
 }
 
